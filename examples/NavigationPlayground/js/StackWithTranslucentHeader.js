@@ -10,7 +10,8 @@ import type {
 import { isIphoneX } from 'react-native-iphone-x-helper';
 
 import * as React from 'react';
-import { BlurView, Constants } from 'expo';
+import { Constants } from 'expo';
+import { BlurView } from 'expo-blur';
 import {
   Dimensions,
   Platform,

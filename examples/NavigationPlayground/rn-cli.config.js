@@ -4,19 +4,19 @@
 
 const fs = require('fs');
 const path = require('path');
-const blacklist = require('metro/src/blacklist');
+const blacklist = require('metro-config/src/defaults/blacklist');
 
 module.exports = {
-  getBlacklistRE() {
-    return blacklist([
+  resolver: {
+    blacklistRE: blacklist([
       /react\-navigation\/examples\/(?!NavigationPlayground).*/,
       /react\-navigation\/node_modules\/react-native\/(.*)/,
       /react\-navigation\/node_modules\/react\/(.*)/,
       /react\-navigation\/node_modules\/react-native-paper\/(.*)/,
       /react\-navigation\/node_modules\/@expo\/vector-icons\/(.*)/,
-    ]);
+    ]),
+    extraNodeModules: getNodeModulesForDirectory(path.resolve('.')),
   },
-  extraNodeModules: getNodeModulesForDirectory(path.resolve('.')),
 };
 
 function getNodeModulesForDirectory(rootPath) {

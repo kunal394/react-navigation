@@ -1,15 +1,17 @@
 /* @flow */
 
 import React from 'react';
-import { Asset, Constants, ScreenOrientation } from 'expo';
+// import { Asset, Constants, ScreenOrientation } from 'expo';
+import { Asset } from 'expo-asset';
+// import { Constants } from 'expo-constants';
+// import { ScreenOrientation } from 'expo-screen-orientation';
 
-ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
+// ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
 
 import {
   Animated,
   Image,
   Platform,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
   Text,
@@ -18,26 +20,13 @@ import {
 } from 'react-native';
 import { SafeAreaView, createStackNavigator } from 'react-navigation';
 
-import CustomTabs from './CustomTabs';
 import CustomTransitioner from './CustomTransitioner';
-import Drawer from './Drawer';
-import MultipleDrawer from './MultipleDrawer';
-import TabsInDrawer from './TabsInDrawer';
 import ModalStack from './ModalStack';
-import StacksInTabs from './StacksInTabs';
-import StacksOverTabs from './StacksOverTabs';
-import StacksOverTopTabs from './StacksOverTopTabs';
 import StacksWithKeys from './StacksWithKeys';
-import InactiveStack from './InactiveStack';
 import StackWithCustomHeaderBackImage from './StackWithCustomHeaderBackImage';
 import SimpleStack from './SimpleStack';
 import StackWithHeaderPreset from './StackWithHeaderPreset';
 import StackWithTranslucentHeader from './StackWithTranslucentHeader';
-import SimpleTabs from './SimpleTabs';
-import CustomTabUI from './CustomTabUI';
-import SwitchWithStacks from './SwitchWithStacks';
-import TabsWithNavigationFocus from './TabsWithNavigationFocus';
-import TabsWithNavigationEvents from './TabsWithNavigationEvents';
 import KeyboardHandlingExample from './KeyboardHandlingExample';
 
 const ExampleInfo = {
@@ -146,12 +135,6 @@ const ExampleInfo = {
 
 const ExampleRoutes = {
   SimpleStack,
-  SwitchWithStacks,
-  SimpleTabs: SimpleTabs,
-  Drawer: Drawer,
-  // MultipleDrawer: {
-  //   screen: MultipleDrawer,
-  // },
   StackWithCustomHeaderBackImage: StackWithCustomHeaderBackImage,
   ...Platform.select({
     ios: {
@@ -160,25 +143,13 @@ const ExampleRoutes = {
     android: {},
   }),
   StackWithTranslucentHeader: StackWithTranslucentHeader,
-  TabsInDrawer: TabsInDrawer,
-  CustomTabs: CustomTabs,
   CustomTransitioner: CustomTransitioner,
   ModalStack: ModalStack,
   StacksWithKeys: StacksWithKeys,
-  StacksInTabs: StacksInTabs,
-  CustomTabUI: CustomTabUI,
-  StacksOverTabs: StacksOverTabs,
-  StacksOverTopTabs: StacksOverTopTabs,
   LinkStack: {
     screen: SimpleStack,
     path: 'people/Jordan',
   },
-  LinkTabs: {
-    screen: SimpleTabs,
-    path: 'settings',
-  },
-  TabsWithNavigationFocus,
-  TabsWithNavigationEvents,
   KeyboardHandlingExample,
   // This is commented out because it's rarely useful
   // InactiveStack,
@@ -187,6 +158,7 @@ const ExampleRoutes = {
 type State = {
   scrollY: Animated.Value,
 };
+
 class MainScreen extends React.Component<any, State> {
   state = {
     scrollY: new Animated.Value(0),
@@ -371,7 +343,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    height: Constants.statusBarHeight,
+    height: 100,
   },
   title: {
     fontSize: 16,

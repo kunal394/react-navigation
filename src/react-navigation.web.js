@@ -32,12 +32,6 @@ module.exports = {
   get StackRouter() {
     return require('./routers/StackRouter').default;
   },
-  get TabRouter() {
-    return require('./routers/TabRouter').default;
-  },
-  get SwitchRouter() {
-    return require('./routers/SwitchRouter').default;
-  },
 
   // NavigationEvents
   get NavigationEvents() {

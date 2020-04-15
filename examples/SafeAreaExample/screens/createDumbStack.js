@@ -9,7 +9,8 @@ import {
   View,
   StatusBar,
 } from 'react-native';
-import { ScreenOrientation } from 'expo';
+// import { ScreenOrientation } from 'expo-screen-orientation';
+import { ScreenOrientation } from 'expo/src/ScreenOrientation';
 
 const Separator = () => (
   <View
@@ -55,7 +56,8 @@ export default (navigationOptions = {}) => {
               paddingTop: 30,
               alignItems: 'center',
               justifyContent: 'center',
-            }}>
+            }}
+          >
             <Button onPress={this._goBack} title="Go back" />
             <Separator />
             <Button onPress={this._setPortrait} title="Set portrait" />

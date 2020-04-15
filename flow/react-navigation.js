@@ -23,13 +23,6 @@ declare module 'react-navigation' {
   declare type AnimatedViewStyleProp = StyleObj;
   declare type AnimatedTextStyleProp = StyleObj;
 
-  // This is copied from the Layout type in
-  // react-native-tab-view/src/TabViewTypeDefinitions
-  declare type TabViewLayout = {
-    height: number,
-    width: number,
-  };
-
   // This is copied from react-native/Libraries/Image/ImageSource.js
   declare type ImageURISource = {
     uri?: string,
@@ -131,27 +124,6 @@ declare module 'react-navigation' {
     +key?: string,
   |};
 
-  declare export type NavigationOpenDrawerAction = {|
-    +type: 'Navigation/OPEN_DRAWER',
-    +key?: string,
-  |};
-  declare export type NavigationCloseDrawerAction = {|
-    +type: 'Navigation/CLOSE_DRAWER',
-    +key?: string,
-  |};
-  declare export type NavigationToggleDrawerAction = {|
-    +type: 'Navigation/TOGGLE_DRAWER',
-    +key?: string,
-  |};
-  declare export type NavigationDrawerOpenedAction = {|
-    +type: 'Navigation/DRAWER_OPENED',
-    +key?: string,
-  |};
-  declare export type NavigationDrawerClosedAction = {|
-    +type: 'Navigation/DRAWER_CLOSED',
-    +key?: string,
-  |};
-
   declare export type NavigationAction =
     | NavigationBackAction
     | NavigationInitAction
@@ -162,12 +134,7 @@ declare module 'react-navigation' {
     | NavigationPushAction
     | NavigationResetAction
     | NavigationReplaceAction
-    | NavigationCompleteTransitionAction
-    | NavigationOpenDrawerAction
-    | NavigationCloseDrawerAction
-    | NavigationToggleDrawerAction
-    | NavigationDrawerOpenedAction
-    | NavigationDrawerClosedAction;
+    | NavigationCompleteTransitionAction;
 
   /**
    * NavigationState is a tree of routes for a single navigator, where each
@@ -424,74 +391,6 @@ declare module 'react-navigation' {
   |};
 
   /**
-   * Switch Navigator
-   */
-
-  declare export type NavigationSwitchRouterConfig = {|
-    initialRouteName?: string,
-    initialRouteParams?: NavigationParams,
-    paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    order?: Array<string>,
-    backBehavior?: 'none' | 'initialRoute', // defaults to `'none'`
-    resetOnBlur?: boolean, // defaults to `true`
-  |};
-
-  /**
-   * Tab Navigator
-   */
-
-  declare export type NavigationTabRouterConfig = {|
-    initialRouteName?: string,
-    initialRouteParams?: NavigationParams,
-    paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    // todo: type these as the real route names rather than 'string'
-    order?: Array<string>,
-    // Does the back button cause the router to switch to the initial tab
-    backBehavior?: 'none' | 'initialRoute', // defaults `initialRoute`
-  |};
-
-  declare type TabScene = {
-    route: NavigationRoute,
-    focused: boolean,
-    index: number,
-    tintColor?: ?string,
-  };
-
-  declare export type NavigationTabScreenOptions = {|
-    ...$Exact<NavigationScreenOptions>,
-    tabBarIcon?:
-      | React$Node
-      | ((options: { tintColor: ?string, focused: boolean }) => ?React$Node),
-    tabBarLabel?:
-      | string
-      | React$Node
-      | ((options: { tintColor: ?string, focused: boolean }) => ?React$Node),
-    tabBarVisible?: boolean,
-    tabBarTestIDProps?: { testID?: string, accessibilityLabel?: string },
-    tabBarOnPress?: ({
-      navigation: NavigationScreenProp<NavigationRoute>,
-      defaultHandler: () => void,
-    }) => void,
-  |};
-
-  /**
-   * Drawer
-   */
-
-  declare export type NavigationDrawerScreenOptions = {|
-    ...$Exact<NavigationScreenOptions>,
-    drawerIcon?:
-      | React$Node
-      | ((options: { tintColor: ?string, focused: boolean }) => ?React$Node),
-    drawerLabel?:
-      | React$Node
-      | ((options: { tintColor: ?string, focused: boolean }) => ?React$Node),
-    drawerLockMode?: 'unlocked' | 'locked-closed' | 'locked-open',
-  |};
-
-  /**
    * Navigator Prop
    */
 
@@ -566,10 +465,6 @@ declare module 'react-navigation' {
     ) => boolean,
     reset?: (actions: NavigationAction[], index: number) => boolean,
     dismiss?: () => boolean,
-    // DrawerRouter action creators
-    openDrawer?: () => boolean,
-    closeDrawer?: () => boolean,
-    toggleDrawer?: () => boolean,
   };
 
   declare export type NavigationNavigatorProps<O: {}, S: {}> = $Shape<{
@@ -828,24 +723,6 @@ declare module 'react-navigation' {
     }) => NavigationCompleteTransitionAction,
   };
 
-  declare export var DrawerActions: {
-    OPEN_DRAWER: 'Navigation/OPEN_DRAWER',
-    CLOSE_DRAWER: 'Navigation/CLOSE_DRAWER',
-    TOGGLE_DRAWER: 'Navigation/TOGGLE_DRAWER',
-    DRAWER_OPENED: 'Navigation/DRAWER_OPENED',
-    DRAWER_CLOSED: 'Navigation/DRAWER_CLOSED',
-
-    openDrawer: (payload: {
-      key?: string,
-    }) => NavigationOpenDrawerAction,
-    closeDrawer: (payload: {
-      key?: string,
-    }) => NavigationCloseDrawerAction,
-    toggleDrawer: (payload: {
-      key?: string,
-    }) => NavigationToggleDrawerAction,
-  };
-
   declare type _RouterProp<S: NavigationState, O: {}> = {
     router: NavigationRouter<S, O>,
   };
@@ -877,88 +754,10 @@ declare module 'react-navigation' {
     stackConfig?: StackNavigatorConfig
   ): NavigationContainer<*, *, *>;
 
-  declare type _TabViewConfig = {|
-    tabBarComponent?: React$ElementType,
-    tabBarPosition?: 'top' | 'bottom',
-    tabBarOptions?: {},
-    swipeEnabled?: boolean,
-    animationEnabled?: boolean,
-    configureTransition?: (
-      currentTransitionProps: Object,
-      nextTransitionProps: Object
-    ) => Object,
-    initialLayout?: TabViewLayout,
-  |};
-  declare type _TabNavigatorConfig = {|
-    ...NavigationTabRouterConfig,
-    ..._TabViewConfig,
-    lazy?: boolean,
-    removeClippedSubviews?: boolean,
-    containerOptions?: void,
-  |};
-  declare export function TabNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _TabNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-  declare export function createTabNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _TabNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-  /* TODO: fix the config for each of these tab navigator types */
-  declare export function createBottomTabNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _TabNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-  declare export function createMaterialTopTabNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _TabNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-  declare type _SwitchNavigatorConfig = {|
-    ...NavigationSwitchRouterConfig,
-  |};
-  declare export function SwitchNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _SwitchNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-  declare export function createSwitchNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _SwitchNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-
-  declare type _DrawerViewConfig = {|
-    drawerLockMode?: 'unlocked' | 'locked-closed' | 'locked-open',
-    drawerWidth?: number | (() => number),
-    drawerPosition?: 'left' | 'right',
-    contentComponent?: React$ElementType,
-    contentOptions?: {},
-    style?: ViewStyleProp,
-    useNativeAnimations?: boolean,
-    drawerBackgroundColor?: string,
-    screenProps?: {},
-  |};
-  declare type _DrawerNavigatorConfig = $Exact<{
-    ...NavigationTabRouterConfig,
-    ..._DrawerViewConfig,
-    containerConfig?: void,
-  }>;
-  declare export function DrawerNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _DrawerNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-  declare export function createDrawerNavigator(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: _DrawerNavigatorConfig
-  ): NavigationContainer<*, *, *>;
-
   declare export function StackRouter(
     routeConfigs: NavigationRouteConfigMap,
     stackConfig?: NavigationStackRouterConfig
   ): NavigationRouter<*, NavigationStackScreenOptions>;
-
-  declare export function TabRouter(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: NavigationTabRouterConfig
-  ): NavigationRouter<*, *>;
 
   declare type _TransitionerProps = {
     configureTransition: (
@@ -1062,127 +861,6 @@ declare module 'react-navigation' {
   declare export var HeaderBackButton: React$ComponentType<
     _HeaderBackButtonProps
   >;
-
-  declare type _DrawerViewProps = {
-    drawerLockMode?: 'unlocked' | 'locked-closed' | 'locked-open',
-    drawerWidth: number | (() => number),
-    drawerPosition: 'left' | 'right',
-    contentComponent: React$ElementType,
-    contentOptions?: {},
-    style?: ViewStyleProp,
-    useNativeAnimations: boolean,
-    drawerBackgroundColor: string,
-    screenProps?: {},
-    navigation: NavigationScreenProp<NavigationState>,
-    router: NavigationRouter<NavigationState, NavigationDrawerScreenOptions>,
-  };
-  declare export var DrawerView: React$ComponentType<_DrawerViewProps>;
-
-  declare type _DrawerScene = {
-    route: NavigationRoute,
-    focused: boolean,
-    index: number,
-    tintColor?: string,
-  };
-  declare type _DrawerItem = {
-    route: NavigationRoute,
-    focused: boolean,
-  };
-  declare type _DrawerItemsProps = {
-    navigation: NavigationScreenProp<NavigationState>,
-    items: Array<NavigationRoute>,
-    activeItemKey?: ?string,
-    activeTintColor?: string,
-    activeBackgroundColor?: string,
-    inactiveTintColor?: string,
-    inactiveBackgroundColor?: string,
-    getLabel: (scene: _DrawerScene) => ?(React$Node | string),
-    renderIcon: (scene: _DrawerScene) => ?React$Node,
-    onItemPress: (info: _DrawerItem) => void,
-    itemsContainerForceInset?: Object,
-    itemsContainerStyle?: ViewStyleProp,
-    itemStyle?: ViewStyleProp,
-    labelStyle?: TextStyleProp,
-    activeLabelStyle?: TextStyleProp,
-    inactiveLabelStyle?: TextStyleProp,
-    iconContainerStyle?: ViewStyleProp,
-    drawerPosition: 'left' | 'right',
-  };
-  declare export var DrawerItems: React$ComponentType<_DrawerItemsProps>;
-
-  declare type _TabViewProps = {
-    tabBarComponent?: React$ElementType,
-    tabBarPosition?: 'top' | 'bottom',
-    tabBarOptions?: {},
-    swipeEnabled?: boolean,
-    animationEnabled?: boolean,
-    configureTransition?: (
-      currentTransitionProps: Object,
-      nextTransitionProps: Object
-    ) => Object,
-    initialLayout: TabViewLayout,
-    screenProps?: {},
-    navigation: NavigationScreenProp<NavigationState>,
-    router: NavigationRouter<NavigationState, NavigationTabScreenOptions>,
-  };
-  declare export var TabView: React$ComponentType<_TabViewProps>;
-
-  declare type _TabBarTopProps = {
-    activeTintColor: string,
-    inactiveTintColor: string,
-    showIcon: boolean,
-    showLabel: boolean,
-    upperCaseLabel: boolean,
-    allowFontScaling: boolean,
-    position: AnimatedValue,
-    tabBarPosition: string,
-    navigation: NavigationScreenProp<NavigationState>,
-    jumpToIndex: (index: number) => void,
-    getLabel: (scene: TabScene) => ?(React$Node | string),
-    getOnPress: (
-      previousScene: NavigationRoute,
-      scene: TabScene
-    ) => ({
-      previousScene: NavigationRoute,
-      scene: TabScene,
-      jumpToIndex: (index: number) => void,
-    }) => void,
-    renderIcon: (scene: TabScene) => React$Element<*>,
-    labelStyle?: TextStyleProp,
-    iconStyle?: ViewStyleProp,
-  };
-  declare export var TabBarTop: React$ComponentType<_TabBarTopProps>;
-
-  declare type _TabBarBottomProps = {
-    activeTintColor: string,
-    activeBackgroundColor: string,
-    adaptive?: boolean,
-    inactiveTintColor: string,
-    inactiveBackgroundColor: string,
-    showLabel: boolean,
-    showIcon: boolean,
-    allowFontScaling: boolean,
-    position: AnimatedValue,
-    navigation: NavigationScreenProp<NavigationState>,
-    jumpToIndex: (index: number) => void,
-    getLabel: (scene: TabScene) => ?(React$Node | string),
-    getOnPress: (
-      previousScene: NavigationRoute,
-      scene: TabScene
-    ) => ({
-      previousScene: NavigationRoute,
-      scene: TabScene,
-      jumpToIndex: (index: number) => void,
-    }) => void,
-    getTestIDProps: (scene: TabScene) => (scene: TabScene) => any,
-    renderIcon: (scene: TabScene) => React$Node,
-    style?: ViewStyleProp,
-    animateStyle?: ViewStyleProp,
-    labelStyle?: TextStyleProp,
-    tabStyle?: ViewStyleProp,
-    showIcon?: boolean,
-  };
-  declare export var TabBarBottom: React$ComponentType<_TabBarBottomProps>;
 
   declare export function withNavigation<Props: {}>(
     Component: React$ComponentType<Props>
