@@ -26,7 +26,10 @@ module.exports = {
     return require('./views/NavigationContext').default.NavigationConsumer;
   },
   get createStackNavigator() {
-    return require('react-navigation-stack').createStackNavigator;
+    return require('./navigators/createContainedStackNavigator').default;
+  },
+  get createUncontainedStackNavigator() {
+    return require('./navigators/createStackNavigator').default;
   },
 
   // Actions
@@ -59,38 +62,59 @@ module.exports = {
     return require('./routers/pathUtils').default;
   },
 
-  // Views
-  get Transitioner() {
-    return require('react-navigation-stack').Transitioner;
+  /**
+   * Views
+   */
+  // Header
+  get Header() {
+    return require('./views/Header/Header').default;
   },
+  get HeaderBackButton() {
+    return require('./views/Header/HeaderBackButton').default;
+  },
+  get HeaderTitle() {
+    return require('./views/Header/HeaderTitle').default;
+  },
+  get HeaderStyleInterpolator() {
+    return require('./views/Header/HeaderStyleInterpolator').default;
+  },
+  
+  // Stack
   get StackView() {
-    return require('react-navigation-stack').StackView;
+    return require('./views/StackView/StackView').default;
   },
   get StackViewCard() {
-    return require('react-navigation-stack').StackViewCard;
+    return require('./views/StackView/StackViewCard').default;
+  },
+  get StackViewLayout() {
+    return require('./views/StackView/StackViewLayout').default;
+  },
+  get StackViewStyleInterpolator() {
+    return require('./views/StackView/StackViewStyleInterpolator').default;
   },
   get StackViewTransitionConfigs() {
-    return require('react-navigation-stack').StackViewTransitionConfigs;
+    return require('./views/StackView/StackViewTransitionConfigs').default;
   },
+  get createPointerEventsContainer() {
+    return require('./views/StackView/createPointerEventsContainer').default;
+  },
+  
+  // Transitioner
+  get Transitioner() {
+    return require('./views/Transitioner').default;
+  },
+    
+  // SceneView
   get SceneView() {
     return require('./views/SceneView').default;
   },
   get ResourceSavingSceneView() {
     return require('./views/ResourceSavingSceneView').default;
   },
-
-  // Header
-  get Header() {
-    return require('react-navigation-stack').Header;
-  },
-  get HeaderTitle() {
-    return require('react-navigation-stack').HeaderTitle;
-  },
-  get HeaderBackButton() {
-    return require('react-navigation-stack').HeaderBackButton;
-  },
-  get HeaderStyleInterpolator() {
-    return require('react-navigation-stack').HeaderStyleInterpolator;
+  
+  // ScenesReducer
+  get ScenesReducer() {
+    return require('./views/ScenesReducer').default;
   },
 
   // HOCs

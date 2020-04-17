@@ -16,8 +16,8 @@ module.exports = {
   get createNavigator() {
     return require('./navigators/createNavigator').default;
   },
-  get createSwitchNavigator() {
-    return require('./navigators/createSwitchNavigator').default;
+  get createStackNavigator() {
+    return require('./navigators/createStackNavigator').default;
   },
 
   // Actions

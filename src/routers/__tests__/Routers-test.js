@@ -3,8 +3,8 @@
 import React from 'react';
 
 import StackRouter from '../StackRouter';
-import TabRouter from '../TabRouter';
-import SwitchRouter from '../SwitchRouter';
+// import TabRouter from '../TabRouter';
+// import SwitchRouter from '../SwitchRouter';
 
 import NavigationActions from '../../NavigationActions';
 import { _TESTING_ONLY_normalize_keys } from '../KeyGenerator';
@@ -14,9 +14,9 @@ beforeEach(() => {
 });
 
 const ROUTERS = {
-  TabRouter,
+  // TabRouter,
   StackRouter,
-  SwitchRouter,
+  // SwitchRouter,
 };
 
 const dummyEventSubscriber = (name, handler) => ({
@@ -116,6 +116,7 @@ Object.keys(ROUTERS).forEach(routerName => {
   });
 });
 
+/*
 test('Nested navigate behavior test', () => {
   const Leaf = () => <div />;
 
@@ -468,3 +469,5 @@ test('Inner actions are only unpacked if the current tab matches', () => {
     innerState && comparable(innerState)
   );
 });
+
+*/

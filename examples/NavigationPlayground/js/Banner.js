@@ -2,8 +2,7 @@
 
 import React from 'react';
 
-import { Image, Platform, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { Image, Platform, StyleSheet, Text, SafeAreaView, View } from 'react-native';
 
 const Banner = () => (
   <SafeAreaView

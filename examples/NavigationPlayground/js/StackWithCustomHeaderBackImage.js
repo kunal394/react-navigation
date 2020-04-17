@@ -5,8 +5,8 @@
 import type { NavigationScreenProp } from 'react-navigation';
 
 import * as React from 'react';
-import { Image, Button, StatusBar, StyleSheet } from 'react-native';
-import { createStackNavigator, SafeAreaView } from 'react-navigation';
+import { Image, Button, StatusBar, SafeAreaView, StyleSheet } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import SampleText from './SampleText';
 
 type MyNavScreenProps = {

@@ -4,8 +4,8 @@
 import type { NavigationScreenProp } from 'react-navigation';
 
 import * as React from 'react';
-import { ScrollView, StatusBar } from 'react-native';
-import { createStackNavigator, SafeAreaView } from 'react-navigation';
+import { ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import invariant from 'invariant';
 
 import { Button } from './commonComponents/ButtonWithMargin';

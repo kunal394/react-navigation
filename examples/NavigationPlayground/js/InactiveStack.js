@@ -1,9 +1,7 @@
 import React from 'react';
-import { Button, Text, StatusBar, View, StyleSheet } from 'react-native';
+import { Button, Text, StatusBar, View, SafeAreaView, StyleSheet } from 'react-native';
 import {
-  SafeAreaView,
   createStackNavigator,
-  createSwitchNavigator,
   NavigationActions,
 } from 'react-navigation';
 

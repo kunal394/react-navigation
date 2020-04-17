@@ -10,10 +10,9 @@ import type {
 } from 'react-navigation';
 
 import * as React from 'react';
-import { Platform, ScrollView, StatusBar } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import {
   createStackNavigator,
-  SafeAreaView,
   withNavigation,
   NavigationActions,
   StackActions,

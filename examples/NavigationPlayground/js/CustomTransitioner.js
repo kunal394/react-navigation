@@ -1,16 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   Animated,
   Easing,
-  Image,
-  Platform,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
 import {
   Transitioner,
-  SafeAreaView,
   StackRouter,
   createNavigationContainer,
   createNavigator,
@@ -44,7 +42,7 @@ const MySettingsScreen = ({ navigation }) => (
 
 class CustomNavigationView extends Component {
   render() {
-    const { navigation, router, descriptors } = this.props;
+    const { navigation, descriptors } = this.props;
 
     return (
       <Transitioner
@@ -56,14 +54,14 @@ class CustomNavigationView extends Component {
     );
   }
 
-  _configureTransition(transitionProps, prevTransitionProps) {
+  _configureTransition() {
     return {
       duration: 200,
       easing: Easing.out(Easing.ease),
     };
   }
 
-  _render = (transitionProps, prevTransitionProps) => {
+  _render = (transitionProps) => {
     const scenes = transitionProps.scenes.map(scene =>
       this._renderScene(transitionProps, scene)
     );
@@ -71,8 +69,7 @@ class CustomNavigationView extends Component {
   };
 
   _renderScene = (transitionProps, scene) => {
-    const { navigation, router } = this.props;
-    const { routes } = navigation.state;
+    const { navigation } = this.props;
     const { position } = transitionProps;
     const { index } = scene;
 

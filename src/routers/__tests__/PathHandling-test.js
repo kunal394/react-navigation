@@ -2,10 +2,7 @@
 
 import React from 'react';
 
-import SwitchRouter from '../SwitchRouter';
 import StackRouter from '../StackRouter';
-import TabRouter from '../TabRouter';
-import StackActions from '../StackActions';
 import NavigationActions from '../../NavigationActions';
 import { _TESTING_ONLY_normalize_keys } from '../KeyGenerator';
 
@@ -560,30 +557,6 @@ const performRouterTest = createTestRouter => {
 describe('Path handling for stack router', () => {
   performRouterTest(StackRouter);
 });
-describe('Path handling for switch router', () => {
-  performRouterTest(SwitchRouter);
-});
-
-test('Handles nested switch routers', () => {
-  const AScreen = () => <div />;
-  const DocsNavigator = () => <div />;
-  DocsNavigator.router = SwitchRouter({
-    A: AScreen,
-    B: AScreen,
-    C: AScreen,
-  });
-  DocsNavigator.path = 'docs';
-  const router = SwitchRouter({
-    Docs: DocsNavigator,
-    D: AScreen,
-  });
-  const action = router.getActionForPathAndParams('docs/B', {});
-
-  expect(action.type).toEqual(NavigationActions.NAVIGATE);
-  expect(action.routeName).toEqual('Docs');
-  expect(action.action.type).toEqual(NavigationActions.NAVIGATE);
-  expect(action.action.routeName).toEqual('B');
-});
 
 const performRouteNameAsPathDisabledTest = createTestRouter => {
   const BScreen = () => <div />;
@@ -611,12 +584,4 @@ const performRouteNameAsPathDisabledTest = createTestRouter => {
 
 describe('Stack router handles disableRouteNamePaths', () => {
   performRouteNameAsPathDisabledTest(StackRouter);
-});
-
-describe('Switch router handles disableRouteNamePaths', () => {
-  performRouteNameAsPathDisabledTest(SwitchRouter);
-});
-
-describe('Tab router handles disableRouteNamePaths', () => {
-  performRouteNameAsPathDisabledTest(TabRouter);
 });

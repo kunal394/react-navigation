@@ -1,11 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import renderer from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 import withOrientation, { isOrientationLandscape } from '../withOrientation';
 
 test('it adds isLandscape to props', () => {
   const WrappedComponent = withOrientation(View);
-  const rendered = renderer.create(<WrappedComponent />).toJSON();
+  console.error(withOrientation(View).prototype.toSource());
+  const rendered = create(<WrappedComponent />).toJSON();
   expect(rendered).toMatchSnapshot();
 });
 

@@ -1,6 +1,6 @@
 // @flow
 
-declare module 'react-navigation' {
+declare module '@ashishsaundekar/react-navigation' {
   /**
    * First, a bunch of things we would love to import but instead must
    * reconstruct (mostly copy-pasted).

@@ -1,9 +1,9 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 import NavigationEvents from '../NavigationEvents';
 import { NavigationProvider } from '../NavigationContext';
 
-const createListener = () => payload => {};
+const createListener = () => (payload) => {};
 
 // An easy way to create the 4 listeners prop
 const createEventListenersProp = () => ({
@@ -24,7 +24,7 @@ const createNavigationAndHelpers = () => {
       add: (name, handler) => {
         removeCalls.push({ name, handler });
       },
-      checkRemoveCalled: count => {
+      checkRemoveCalled: (count) => {
         expect(removeCalls.length).toBe(count);
       },
       checkRemoveCalledWith: (name, handler) => {
@@ -41,13 +41,13 @@ const createNavigationAndHelpers = () => {
     }),
   };
 
-  const checkAddListenerCalled = count => {
+  const checkAddListenerCalled = (count) => {
     expect(navigation.addListener).toHaveBeenCalledTimes(count);
   };
   const checkAddListenerCalledWith = (eventName, handler) => {
     expect(navigation.addListener).toHaveBeenCalledWith(eventName, handler);
   };
-  const checkRemoveCalled = count => {
+  const checkRemoveCalled = (count) => {
     removeCallsAPI.checkRemoveCalled(count);
   };
   const checkRemoveCalledWith = (eventName, handler) => {
@@ -89,7 +89,7 @@ describe('NavigationEvents', () => {
       checkAddListenerCalledWith,
     } = createNavigationAndHelpers();
     const eventListenerProps = createEventListenersProp();
-    const component = renderer.create(
+    const component = create(
       <NavigationEventsTestComp
         withContext={false}
         navigation={navigation}
@@ -110,7 +110,7 @@ describe('NavigationEvents', () => {
       checkAddListenerCalledWith,
     } = createNavigationAndHelpers();
     const eventListenerProps = createEventListenersProp();
-    const component = renderer.create(
+    const component = create(
       <NavigationEventsTestComp
         withContext={true}
         navigation={navigation}
@@ -132,7 +132,7 @@ describe('NavigationEvents', () => {
     } = createNavigationAndHelpers();
     const eventListenerProps = createEventListenersProp();
 
-    const component = renderer.create(
+    const component = create(
       <NavigationEventsTestComp
         navigation={navigation}
         {...eventListenerProps}
@@ -154,7 +154,7 @@ describe('NavigationEvents', () => {
       checkAddListenerCalledWith,
     } = createNavigationAndHelpers();
     const listener = createListener();
-    const component = renderer.create(
+    const component = create(
       <NavigationEventsTestComp navigation={navigation} onDidFocus={listener} />
     );
     checkAddListenerCalled(1);
@@ -168,7 +168,7 @@ describe('NavigationEvents', () => {
       checkAddListenerCalledWith,
     } = createNavigationAndHelpers();
     const eventListenerProps = createEventListenersProp();
-    const component = renderer.create(
+    const component = create(
       <NavigationEventsTestComp
         navigation={navigation}
         {...eventListenerProps}
@@ -203,7 +203,7 @@ describe('NavigationEvents', () => {
     } = createNavigationAndHelpers();
     const eventListenerProps = createEventListenersProp();
 
-    const component = renderer.create(
+    const component = create(
       <NavigationEventsTestComp
         navigation={navigation}
         {...eventListenerProps}

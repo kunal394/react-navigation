@@ -6,25 +6,25 @@
 import React from 'react';
 
 // See https://github.com/facebook/jest/issues/2208
-jest.mock('Linking', () => ({
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  openURL: jest.fn(),
-  canOpenURL: jest.fn(),
-  getInitialURL: jest
-    .fn()
-    .mockImplementation((value: string) => Promise.resolve(value)),
-}));
+// jest.mock('Linking', () => ({
+//   addEventListener: jest.fn(),
+//   removeEventListener: jest.fn(),
+//   openURL: jest.fn(),
+//   canOpenURL: jest.fn(),
+//   getInitialURL: jest
+//     .fn()
+//     .mockImplementation((value: string) => Promise.resolve(value)),
+// }));
 
 // See https://github.com/facebook/react-native/issues/11659
-jest.mock('ScrollView', () => {
-  // $FlowExpectedError
-  const RealComponent = require.requireActual('ScrollView');
-  class ScrollView extends RealComponent {
-    scrollTo = () => {};
-  }
-  return ScrollView;
-});
+// jest.mock('ScrollView', () => {
+//   // $FlowExpectedError
+//   const RealComponent = require.requireActual('ScrollView');
+//   class ScrollView extends RealComponent {
+//     scrollTo = () => {};
+//   }
+//   return ScrollView;
+// });
 
 // Mock setState so it waits using setImmediate before actually being called,
 // so we can use jest's mock timers to control it.

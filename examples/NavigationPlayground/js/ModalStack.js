@@ -3,8 +3,8 @@
  */
 
 import React from 'react';
-import { ScrollView, StatusBar, Text } from 'react-native';
-import { SafeAreaView, createStackNavigator } from 'react-navigation';
+import { ScrollView, StatusBar, SafeAreaView, Text } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import SampleText from './SampleText';
 import { Button } from './commonComponents/ButtonWithMargin';
 

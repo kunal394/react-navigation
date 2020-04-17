@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import renderer from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 
 import NavigationActions from '../NavigationActions';
 
 // TODO: we should create a dummy navigator here
-import { createStackNavigator } from 'react-navigation-stack';
+import createStackNavigator from '../navigators/createStackNavigator';
 import createNavigationContainer, {
   _TESTING_ONLY_reset_container_count,
 } from '../createNavigationContainer';
@@ -52,9 +52,7 @@ describe('NavigationContainer', () => {
 
   describe('state.nav', () => {
     it("should be preloaded with the router's initial state", () => {
-      const navigationContainer = renderer
-        .create(<NavigationContainer />)
-        .getInstance();
+      const navigationContainer = create(<NavigationContainer />).getInstance();
       expect(navigationContainer.state.nav).toMatchObject({ index: 0 });
       expect(navigationContainer.state.nav.routes).toBeInstanceOf(Array);
       expect(navigationContainer.state.nav.routes.length).toBe(1);
@@ -66,9 +64,7 @@ describe('NavigationContainer', () => {
 
   describe('dispatch', () => {
     it('returns true when given a valid action', () => {
-      const navigationContainer = renderer
-        .create(<NavigationContainer />)
-        .getInstance();
+      const navigationContainer = create(<NavigationContainer />).getInstance();
       jest.runOnlyPendingTimers();
       expect(
         navigationContainer.dispatch(
@@ -78,9 +74,7 @@ describe('NavigationContainer', () => {
     });
 
     it('returns false when given an invalid action', () => {
-      const navigationContainer = renderer
-        .create(<NavigationContainer />)
-        .getInstance();
+      const navigationContainer = create(<NavigationContainer />).getInstance();
       jest.runOnlyPendingTimers();
       expect(navigationContainer.dispatch(NavigationActions.back())).toEqual(
         false
@@ -88,9 +82,7 @@ describe('NavigationContainer', () => {
     });
 
     it('updates state.nav with an action by the next tick', () => {
-      const navigationContainer = renderer
-        .create(<NavigationContainer />)
-        .getInstance();
+      const navigationContainer = create(<NavigationContainer />).getInstance();
 
       expect(
         navigationContainer.dispatch(
@@ -108,9 +100,7 @@ describe('NavigationContainer', () => {
     });
 
     it('does not discard actions when called twice in one tick', () => {
-      const navigationContainer = renderer
-        .create(<NavigationContainer />)
-        .getInstance();
+      const navigationContainer = create(<NavigationContainer />).getInstance();
       const initialState = JSON.parse(
         JSON.stringify(navigationContainer.state.nav)
       );
@@ -146,9 +136,7 @@ describe('NavigationContainer', () => {
     });
 
     it('does not discard actions when called more than 2 times in one tick', () => {
-      const navigationContainer = renderer
-        .create(<NavigationContainer />)
-        .getInstance();
+      const navigationContainer = create(<NavigationContainer />).getInstance();
       const initialState = JSON.parse(
         JSON.stringify(navigationContainer.state.nav)
       );
@@ -259,7 +247,7 @@ describe('NavigationContainer', () => {
           })
         );
 
-        renderer.create(<RootStack />).toJSON();
+        create(<RootStack />).toJSON();
         expect(spy).toMatchSnapshot();
       });
     });

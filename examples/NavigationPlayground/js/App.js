@@ -15,10 +15,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  SafeAreaView,
   StatusBar,
   View,
 } from 'react-native';
-import { SafeAreaView, createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import CustomTransitioner from './CustomTransitioner';
 import ModalStack from './ModalStack';

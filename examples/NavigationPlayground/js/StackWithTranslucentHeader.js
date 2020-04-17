@@ -10,7 +10,7 @@ import type {
 import { isIphoneX } from 'react-native-iphone-x-helper';
 
 import * as React from 'react';
-import { Constants } from 'expo';
+import * as Expo from 'expo';
 import { BlurView } from 'expo-blur';
 import {
   Dimensions,
@@ -80,7 +80,7 @@ class MyNavScreen extends React.Component<MyNavScreenProps> {
     const HEADER_HEIGHT =
       Platform.OS === 'ios'
         ? BASE_HEADER_HEIGHT + NOTCH_HEIGHT
-        : BASE_HEADER_HEIGHT + Constants.statusBarHeight;
+        : BASE_HEADER_HEIGHT + Expo.Constants.statusBarHeight;
 
     return Platform.select({
       ios: {

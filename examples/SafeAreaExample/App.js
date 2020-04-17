@@ -3,10 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, withNavigation } from 'react-navigation';
 import { Constants } from 'expo';
 import Touchable from 'react-native-platform-touchable';
-import TabsScreen from './screens/TabsScreen';
-import DrawerScreen from './screens/DrawerScreen';
 import createDumbStack from './screens/createDumbStack';
-import createDumbTabs from './screens/createDumbTabs';
 
 export default class App extends React.Component {
   render() {
@@ -119,63 +116,6 @@ const StackWithHeaderMargin = createDumbStack({
   headerStyle: { margin: 20 },
 });
 
-const TabBarWithHeight = createDumbTabs(
-  {
-    tabBarLabel: 'label!',
-    tabBarOptions: {
-      style: {
-        height: 100,
-      },
-    },
-  },
-  createDumbStack({
-    title: 'tabBar height 100',
-  })
-);
-
-const TabBarWithPadding = createDumbTabs(
-  {
-    tabBarLabel: 'label!',
-    tabBarOptions: {
-      style: {
-        padding: 20,
-      },
-    },
-  },
-  createDumbStack({
-    title: 'tabBar padding 20',
-  })
-);
-
-const TabBarWithHeightAndPadding = createDumbTabs(
-  {
-    tabBarLabel: 'label!',
-    tabBarOptions: {
-      style: {
-        padding: 20,
-        height: 100,
-      },
-    },
-  },
-  createDumbStack({
-    title: 'tabBar height 100 padding 20',
-  })
-);
-
-const TabBarWithMargin = createDumbTabs(
-  {
-    tabBarLabel: 'label!',
-    tabBarOptions: {
-      style: {
-        margin: 20,
-      },
-    },
-  },
-  createDumbStack({
-    title: 'tabBar margin 20',
-  })
-);
-
 const RootStack = StackNavigator(
   {
     exampleList: {
@@ -199,18 +139,6 @@ const RootStack = StackNavigator(
     headerMargin: {
       screen: StackWithHeaderMargin,
     },
-    tabBarHeight: {
-      screen: TabBarWithHeight,
-    },
-    tabBarPadding: {
-      screen: TabBarWithPadding,
-    },
-    tabBarHeightAndPadding: {
-      screen: TabBarWithHeightAndPadding,
-    },
-    tabBarMargin: {
-      screen: TabBarWithMargin,
-    },
   },
   {
     headerMode: 'none',
@@ -219,20 +147,6 @@ const RootStack = StackNavigator(
     },
   }
 );
-
-// basic tabs (different navbar color, different tabbar color)
-// different header height
-// different header padding
-// different header height and padding
-// different header margin
-// different tabbar height
-// different tabbar padding
-// different tabbar height and padding
-// different tabbar margin
-// without navbar, without safeareaview in one tab and with safeareaview in another tab
-// all should be able to toggle between landscape and portrait
-
-// basic drawer (different navbar color, mess around with drawer options)
 
 const styles = StyleSheet.create({
   container: {
