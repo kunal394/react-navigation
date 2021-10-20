@@ -5,14 +5,15 @@ import { NavigationConsumer } from './NavigationContext';
 
 export default function withNavigation(Component) {
   class ComponentWithNavigation extends React.Component {
-    static displayName = `withNavigation(${Component.displayName ||
-      Component.name})`;
+    static displayName = `withNavigation(${
+      Component.displayName || Component.name
+    })`;
 
     render() {
       const navigationProp = this.props.navigation;
       return (
         <NavigationConsumer>
-          {navigationContext => {
+          {(navigationContext) => {
             const navigation = navigationProp || navigationContext;
             invariant(
               !!navigation,

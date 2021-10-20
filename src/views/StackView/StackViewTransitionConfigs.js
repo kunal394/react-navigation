@@ -9,14 +9,14 @@ if (supportsImprovedSpringAnimation()) {
     timing: Animated.spring,
     stiffness: 1000,
     damping: 500,
-    mass: 3
+    mass: 3,
   };
 } else {
   // This is an approximation of the IOS spring animation using a derived bezier curve
   IOSTransitionSpec = {
     duration: 500,
     easing: Easing.bezier(0.2833, 0.99, 0.31833, 0.99),
-    timing: Animated.timing
+    timing: Animated.timing,
   };
 }
 
@@ -25,8 +25,8 @@ const SlideFromRightIOS = {
   transitionSpec: IOSTransitionSpec,
   screenInterpolator: StyleInterpolator.forHorizontal,
   containerStyle: {
-    backgroundColor: '#000'
-  }
+    backgroundColor: '#000',
+  },
 };
 
 // Standard iOS navigation transition for modals
@@ -34,8 +34,8 @@ const ModalSlideFromBottomIOS = {
   transitionSpec: IOSTransitionSpec,
   screenInterpolator: StyleInterpolator.forVertical,
   containerStyle: {
-    backgroundColor: '#000'
-  }
+    backgroundColor: '#000',
+  },
 };
 
 // Standard Android navigation transition when opening an Activity
@@ -44,9 +44,9 @@ const FadeInFromBottomAndroid = {
   transitionSpec: {
     duration: 350,
     easing: Easing.out(Easing.poly(5)), // decelerate
-    timing: Animated.timing
+    timing: Animated.timing,
   },
-  screenInterpolator: StyleInterpolator.forFadeFromBottomAndroid
+  screenInterpolator: StyleInterpolator.forFadeFromBottomAndroid,
 };
 
 // Standard Android navigation transition when closing an Activity
@@ -55,16 +55,23 @@ const FadeOutToBottomAndroid = {
   transitionSpec: {
     duration: 230,
     easing: Easing.in(Easing.poly(4)), // accelerate
-    timing: Animated.timing
+    timing: Animated.timing,
   },
-  screenInterpolator: StyleInterpolator.forFadeFromBottomAndroid
+  screenInterpolator: StyleInterpolator.forFadeFromBottomAndroid,
 };
 
-function defaultTransitionConfig(transitionProps, prevTransitionProps, isModal) {
+function defaultTransitionConfig(
+  transitionProps,
+  prevTransitionProps,
+  isModal
+) {
   if (Platform.OS === 'android') {
     // Use the default Android animation no matter if the screen is a modal.
     // Android doesn't have full-screen modals like iOS does, it has dialogs.
-    if (prevTransitionProps && transitionProps.index < prevTransitionProps.index) {
+    if (
+      prevTransitionProps &&
+      transitionProps.index < prevTransitionProps.index
+    ) {
       // Navigating back to the previous screen
       return FadeOutToBottomAndroid;
     }
@@ -77,12 +84,21 @@ function defaultTransitionConfig(transitionProps, prevTransitionProps, isModal) 
   return SlideFromRightIOS;
 }
 
-function getTransitionConfig(transitionConfigurer, transitionProps, prevTransitionProps, isModal) {
-  const defaultConfig = defaultTransitionConfig(transitionProps, prevTransitionProps, isModal);
+function getTransitionConfig(
+  transitionConfigurer,
+  transitionProps,
+  prevTransitionProps,
+  isModal
+) {
+  const defaultConfig = defaultTransitionConfig(
+    transitionProps,
+    prevTransitionProps,
+    isModal
+  );
   if (transitionConfigurer) {
     return {
       ...defaultConfig,
-      ...transitionConfigurer(transitionProps, prevTransitionProps, isModal)
+      ...transitionConfigurer(transitionProps, prevTransitionProps, isModal),
     };
   }
   return defaultConfig;
@@ -94,5 +110,5 @@ export default {
   SlideFromRightIOS,
   ModalSlideFromBottomIOS,
   FadeInFromBottomAndroid,
-  FadeOutToBottomAndroid
+  FadeOutToBottomAndroid,
 };

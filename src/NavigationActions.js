@@ -19,7 +19,7 @@ const init = (payload = {}) => {
   return action;
 };
 
-const navigate = payload => {
+const navigate = (payload) => {
   const action = {
     type: NAVIGATE,
     routeName: payload.routeName,
@@ -36,7 +36,7 @@ const navigate = payload => {
   return action;
 };
 
-const setParams = payload => ({
+const setParams = (payload) => ({
   type: SET_PARAMS,
   key: payload.key,
   params: payload.params,

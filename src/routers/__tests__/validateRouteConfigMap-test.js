@@ -12,6 +12,7 @@ ProfileNavigator.router = StackRouter({
   },
 });
 
+// eslint-disable-next-line react/display-name
 const ScreenWithForwardRef = React.forwardRef((props, ref) => (
   <div ref={ref} />
 ));

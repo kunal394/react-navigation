@@ -8,11 +8,11 @@ const EPS = 1e-5;
 function getAccessibilityProps(isActive) {
   if (Platform.OS === 'ios') {
     return {
-      accessibilityElementsHidden: !isActive
+      accessibilityElementsHidden: !isActive,
     };
   } else if (Platform.OS === 'android') {
     return {
-      importantForAccessibility: isActive ? 'yes' : 'no-hide-descendants'
+      importantForAccessibility: isActive ? 'yes' : 'no-hide-descendants',
     };
   } else {
     return null;
@@ -30,18 +30,29 @@ class Card extends React.Component {
       style,
       position,
       transparent,
-      scene: { index, isActive }
+      scene: { index, isActive },
     } = this.props;
 
-    const active = transparent || isActive ? 1 : position.interpolate({
-      inputRange: [index, index + 1 - EPS, index + 1],
-      outputRange: [1, 1, 0],
-      extrapolate: 'clamp'
-    });
+    const active =
+      transparent || isActive
+        ? 1
+        : position.interpolate({
+            inputRange: [index, index + 1 - EPS, index + 1],
+            outputRange: [1, 1, 0],
+            extrapolate: 'clamp',
+          });
 
-    return <Screen pointerEvents={pointerEvents} onComponentRef={this.props.onComponentRef} style={[transparent ? styles.transparent : styles.main, style]} active={active} {...getAccessibilityProps(isActive)}>
+    return (
+      <Screen
+        pointerEvents={pointerEvents}
+        onComponentRef={this.props.onComponentRef}
+        style={[transparent ? styles.transparent : styles.main, style]}
+        active={active}
+        {...getAccessibilityProps(isActive)}
+      >
         {children}
-      </Screen>;
+      </Screen>
+    );
   }
 }
 
@@ -52,12 +63,12 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
-    shadowRadius: 5
+    shadowRadius: 5,
   },
   transparent: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'transparent'
-  }
+    backgroundColor: 'transparent',
+  },
 });
 
 export default createPointerEventsContainer(Card);

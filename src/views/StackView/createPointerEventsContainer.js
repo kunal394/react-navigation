@@ -23,19 +23,31 @@ export default function createPointerEventsContainer(Component) {
       this._bindPosition();
       this._pointerEvents = this._computePointerEvents();
 
-      return <Component {...this.props} pointerEvents={this._pointerEvents} onComponentRef={this._onComponentRef} />;
+      return (
+        <Component
+          {...this.props}
+          pointerEvents={this._pointerEvents}
+          onComponentRef={this._onComponentRef}
+        />
+      );
     }
 
-    _onComponentRef = component => {
+    _onComponentRef = (component) => {
       this._component = component;
       if (component) {
-        invariant(typeof component.setNativeProps === 'function', 'component must implement method `setNativeProps`');
+        invariant(
+          typeof component.setNativeProps === 'function',
+          'component must implement method `setNativeProps`'
+        );
       }
     };
 
     _bindPosition() {
       this._positionListener && this._positionListener.remove();
-      this._positionListener = new AnimatedValueSubscription(this.props.position, this._onPositionChange);
+      this._positionListener = new AnimatedValueSubscription(
+        this.props.position,
+        this._onPositionChange
+      );
     }
 
     _onPositionChange = () => {

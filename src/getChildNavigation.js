@@ -3,7 +3,7 @@ import getChildRouter from './getChildRouter';
 import getNavigationActionCreators from './routers/getNavigationActionCreators';
 import invariant from './utils/invariant';
 
-const createParamGetter = route => (paramName, defaultValue) => {
+const createParamGetter = (route) => (paramName, defaultValue) => {
   const params = route.params;
 
   if (params && paramName in params) {
@@ -17,7 +17,7 @@ function getChildNavigation(navigation, childKey, getCurrentParentNavigation) {
   const children =
     navigation._childrenNavigation || (navigation._childrenNavigation = {});
 
-  const childRoute = navigation.state.routes.find(r => r.key === childKey);
+  const childRoute = navigation.state.routes.find((r) => r.key === childKey);
 
   if (!childRoute) {
     return null;
@@ -49,7 +49,7 @@ function getChildNavigation(navigation, childKey, getCurrentParentNavigation) {
   };
 
   const actionHelpers = {};
-  Object.keys(actionCreators).forEach(actionName => {
+  Object.keys(actionCreators).forEach((actionName) => {
     actionHelpers[actionName] = (...args) => {
       const actionCreator = actionCreators[actionName];
       const action = actionCreator(...args);
@@ -82,7 +82,7 @@ function getChildNavigation(navigation, childKey, getCurrentParentNavigation) {
     actions: actionCreators,
     getParam: createParamGetter(childRoute),
 
-    getChildNavigation: grandChildKey =>
+    getChildNavigation: (grandChildKey) =>
       getChildNavigation(children[childKey], grandChildKey, () => {
         const nav = getCurrentParentNavigation();
         return nav && nav.getChildNavigation(childKey);

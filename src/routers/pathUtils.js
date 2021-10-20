@@ -40,7 +40,7 @@ const getParamsFromPath = (inputParams, pathMatch, pathMatchKeys) => {
   return params;
 };
 const getRestOfPath = (pathMatch, pathMatchKeys) => {
-  const rest = pathMatch[pathMatchKeys.findIndex(k => k.asterisk) + 1];
+  const rest = pathMatch[pathMatchKeys.findIndex((k) => k.asterisk) + 1];
   return rest;
 };
 export const urlToPathAndParams = (url, uriPrefix) => {
@@ -73,7 +73,7 @@ export const createPathParser = (
   let paths = [];
 
   // Build pathsByRouteNames, which includes a regex to match paths for each route. Keep in mind, the regex will pass for the route and all child routes. The code that uses pathsByRouteNames will need to also verify that the child router produces an action, in the case of isPathMatchable false (a null path).
-  Object.keys(childRouters).forEach(routeName => {
+  Object.keys(childRouters).forEach((routeName) => {
     let pathPattern;
 
     // First check for paths on the router, then check the route config
@@ -185,7 +185,7 @@ export const createPathParser = (
 
     return null;
   };
-  const getPathAndParamsForRoute = route => {
+  const getPathAndParamsForRoute = (route) => {
     const { routeName, params } = route;
     const childRouter = childRouters[routeName];
     const { toPath, exactReKeys } = pathsByRouteNames[routeName];
@@ -193,8 +193,8 @@ export const createPathParser = (
     const nonPathParams = {};
     if (params) {
       Object.keys(params)
-        .filter(paramName => !exactReKeys.find(k => k.name === paramName))
-        .forEach(paramName => {
+        .filter((paramName) => !exactReKeys.find((k) => k.name === paramName))
+        .forEach((paramName) => {
           nonPathParams[paramName] = params[paramName];
         });
     }

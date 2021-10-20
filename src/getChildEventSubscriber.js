@@ -18,12 +18,12 @@ export default function getChildEventSubscriber(addListener, key) {
       didFocusSubscribers,
       willBlurSubscribers,
       didBlurSubscribers,
-    ].forEach(set => set.clear());
+    ].forEach((set) => set.clear());
 
-    upstreamSubscribers.forEach(subs => subs && subs.remove());
+    upstreamSubscribers.forEach((subs) => subs && subs.remove());
   };
 
-  const getChildSubscribers = evtName => {
+  const getChildSubscribers = (evtName) => {
     switch (evtName) {
       case 'action':
         return actionSubscribers;
@@ -44,7 +44,7 @@ export default function getChildEventSubscriber(addListener, key) {
     const payloadWithType = { ...payload, type };
     const subscribers = getChildSubscribers(type);
     subscribers &&
-      subscribers.forEach(subs => {
+      subscribers.forEach((subs) => {
         subs(payloadWithType);
       });
   };
@@ -63,8 +63,8 @@ export default function getChildEventSubscriber(addListener, key) {
     'action',
   ];
 
-  const upstreamSubscribers = upstreamEvents.map(eventName =>
-    addListener(eventName, payload => {
+  const upstreamSubscribers = upstreamEvents.map((eventName) =>
+    addListener(eventName, (payload) => {
       const { state, lastState, action } = payload;
       const lastRoutes = lastState && lastState.routes;
       const routes = state && state.routes;
@@ -75,8 +75,8 @@ export default function getChildEventSubscriber(addListener, key) {
 
       const isChildFocused = focusKey === key;
       const lastRoute =
-        lastRoutes && lastRoutes.find(route => route.key === key);
-      const newRoute = routes && routes.find(route => route.key === key);
+        lastRoutes && lastRoutes.find((route) => route.key === key);
+      const newRoute = routes && routes.find((route) => route.key === key);
       const childPayload = {
         context: `${key}:${action.type}_${payload.context || 'Root'}`,
         state: newRoute,

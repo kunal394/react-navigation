@@ -23,7 +23,7 @@ const dummyEventSubscriber = (name, handler) => ({
   remove: () => {},
 });
 
-Object.keys(ROUTERS).forEach(routerName => {
+Object.keys(ROUTERS).forEach((routerName) => {
   const Router = ROUTERS[routerName];
 
   describe(`General router features - ${routerName}`, () => {

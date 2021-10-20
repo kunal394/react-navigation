@@ -34,7 +34,7 @@ import React from 'react';
 const setState = React.Component.prototype.setState;
 // $FlowExpectedError
 Object.defineProperty(React.Component.prototype, 'setState', {
-  value: function() {
+  value: function () {
     setImmediate(() => {
       setState.apply(this, arguments);
     });

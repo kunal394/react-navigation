@@ -78,7 +78,7 @@ module.exports = {
   get HeaderStyleInterpolator() {
     return require('./views/Header/HeaderStyleInterpolator').default;
   },
-  
+
   // Stack
   get StackView() {
     return require('./views/StackView/StackView').default;
@@ -98,12 +98,12 @@ module.exports = {
   get createPointerEventsContainer() {
     return require('./views/StackView/createPointerEventsContainer').default;
   },
-  
+
   // Transitioner
   get Transitioner() {
     return require('./views/Transitioner').default;
   },
-    
+
   // SceneView
   get SceneView() {
     return require('./views/SceneView').default;
@@ -111,7 +111,7 @@ module.exports = {
   get ResourceSavingSceneView() {
     return require('./views/ResourceSavingSceneView').default;
   },
-  
+
   // ScenesReducer
   get ScenesReducer() {
     return require('./views/ScenesReducer').default;

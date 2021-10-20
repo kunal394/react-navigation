@@ -17,7 +17,7 @@ class NavigationEvents extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    EventNames.forEach(eventName => {
+    EventNames.forEach((eventName) => {
       const listenerHasChanged =
         this.props[EventNameToPropName[eventName]] !==
         prevProps[EventNameToPropName[eventName]];
@@ -32,7 +32,7 @@ class NavigationEvents extends React.Component {
     EventNames.forEach(this.removeListener);
   }
 
-  addListener = eventName => {
+  addListener = (eventName) => {
     const listener = this.props[EventNameToPropName[eventName]];
     if (listener) {
       this.subscriptions[eventName] = this.props.navigation.addListener(
@@ -42,7 +42,7 @@ class NavigationEvents extends React.Component {
     }
   };
 
-  removeListener = eventName => {
+  removeListener = (eventName) => {
     if (this.subscriptions[eventName]) {
       this.subscriptions[eventName].remove();
       this.subscriptions[eventName] = undefined;

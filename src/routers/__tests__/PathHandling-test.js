@@ -10,7 +10,7 @@ beforeEach(() => {
   _TESTING_ONLY_normalize_keys();
 });
 
-const performRouterTest = createTestRouter => {
+const performRouterTest = (createTestRouter) => {
   const ListScreen = () => <div />;
 
   const ProfileNavigator = () => <div />;
@@ -558,7 +558,7 @@ describe('Path handling for stack router', () => {
   performRouterTest(StackRouter);
 });
 
-const performRouteNameAsPathDisabledTest = createTestRouter => {
+const performRouteNameAsPathDisabledTest = (createTestRouter) => {
   const BScreen = () => <div />;
   const NestedNavigator = () => <div />;
   NestedNavigator.router = createTestRouter({

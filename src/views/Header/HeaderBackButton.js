@@ -1,5 +1,12 @@
 import React from 'react';
-import { I18nManager, Image, Text, View, Platform, StyleSheet } from 'react-native';
+import {
+  I18nManager,
+  Image,
+  Text,
+  View,
+  Platform,
+  StyleSheet,
+} from 'react-native';
 
 import TouchableItem from '../TouchableItem';
 
@@ -9,19 +16,19 @@ class HeaderBackButton extends React.PureComponent {
   static defaultProps = {
     pressColorAndroid: 'rgba(0, 0, 0, .32)',
     tintColor: Platform.select({
-      ios: '#037aff'
+      ios: '#037aff',
     }),
-    truncatedTitle: 'Back'
+    truncatedTitle: 'Back',
   };
 
   state = {};
 
-  _onTextLayout = e => {
+  _onTextLayout = (e) => {
     if (this.state.initialTextWidth) {
       return;
     }
     this.setState({
-      initialTextWidth: e.nativeEvent.layout.x + e.nativeEvent.layout.width
+      initialTextWidth: e.nativeEvent.layout.x + e.nativeEvent.layout.width,
     });
   };
 
@@ -37,13 +44,17 @@ class HeaderBackButton extends React.PureComponent {
       BackImage = backImage;
       props = {
         tintColor,
-        title
+        title,
       };
     } else {
       BackImage = Image;
       props = {
-        style: [styles.icon, !!title && styles.iconWithTitle, !!tintColor && { tintColor }],
-        source: defaultBackImage
+        style: [
+          styles.icon,
+          !!title && styles.iconWithTitle,
+          !!tintColor && { tintColor },
+        ],
+        source: defaultBackImage,
       };
     }
 
@@ -58,36 +69,62 @@ class HeaderBackButton extends React.PureComponent {
       title,
       titleStyle,
       tintColor,
-      truncatedTitle
+      truncatedTitle,
     } = this.props;
 
-    const renderTruncated = this.state.initialTextWidth && width ? this.state.initialTextWidth > width : false;
+    const renderTruncated =
+      this.state.initialTextWidth && width
+        ? this.state.initialTextWidth > width
+        : false;
 
     const backButtonTitle = renderTruncated ? truncatedTitle : title;
 
     // If the left preset is used and we aren't on Android, then we
     // default to disabling the label
-    const titleDefaultsToDisabled = layoutPreset === 'left' || Platform.OS === 'android' || typeof backButtonTitle !== 'string';
+    const titleDefaultsToDisabled =
+      layoutPreset === 'left' ||
+      Platform.OS === 'android' ||
+      typeof backButtonTitle !== 'string';
 
     // If the title is explicitly enabled then we respect that
     if (titleDefaultsToDisabled && !backTitleVisible) {
       return null;
     }
 
-    return <Text accessible={false} onLayout={this._onTextLayout} style={[styles.title, !!tintColor && { color: tintColor }, titleStyle]} numberOfLines={1}>
+    return (
+      <Text
+        accessible={false}
+        onLayout={this._onTextLayout}
+        style={[styles.title, !!tintColor && { color: tintColor }, titleStyle]}
+        numberOfLines={1}
+      >
         {backButtonTitle}
-      </Text>;
+      </Text>
+    );
   }
 
   render() {
     const { onPress, pressColorAndroid, title } = this.props;
 
-    let button = <TouchableItem accessible accessibilityComponentType="button" accessibilityLabel={title} accessibilityTraits="button" testID="header-back" delayPressIn={0} onPress={onPress} pressColor={pressColorAndroid} style={styles.container} borderless>
+    let button = (
+      <TouchableItem
+        accessible
+        accessibilityComponentType="button"
+        accessibilityLabel={title}
+        accessibilityTraits="button"
+        testID="header-back"
+        delayPressIn={0}
+        onPress={onPress}
+        pressColor={pressColorAndroid}
+        style={styles.container}
+        borderless
+      >
         <View style={styles.container}>
           {this._renderBackImage()}
           {this._maybeRenderTitle()}
         </View>
-      </TouchableItem>;
+      </TouchableItem>
+    );
 
     if (Platform.OS === 'android') {
       return <View style={styles.androidButtonWrapper}>{button}</View>;
@@ -100,35 +137,41 @@ class HeaderBackButton extends React.PureComponent {
 const styles = StyleSheet.create({
   androidButtonWrapper: {
     margin: 13,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 17,
-    paddingRight: 10
+    paddingRight: 10,
   },
-  icon: Platform.OS === 'ios' ? {
-    height: 21,
-    width: 13,
-    marginLeft: 9,
-    marginRight: 22,
-    marginVertical: 12,
-    resizeMode: 'contain',
-    transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }]
-  } : {
-    height: 24,
-    width: 24,
-    margin: 3,
-    resizeMode: 'contain',
-    transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }]
-  },
-  iconWithTitle: Platform.OS === 'ios' ? {
-    marginRight: 6
-  } : {}
+  icon:
+    Platform.OS === 'ios'
+      ? {
+          height: 21,
+          width: 13,
+          marginLeft: 9,
+          marginRight: 22,
+          marginVertical: 12,
+          resizeMode: 'contain',
+          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+        }
+      : {
+          height: 24,
+          width: 24,
+          margin: 3,
+          resizeMode: 'contain',
+          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+        },
+  iconWithTitle:
+    Platform.OS === 'ios'
+      ? {
+          marginRight: 6,
+        }
+      : {},
 });
 
 export default HeaderBackButton;
