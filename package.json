@@ -1,6 +1,6 @@
 {
-  "name": "@ashishsaundekar/react-navigation",
-  "version": "2.18.6",
+  "name": "@rnjs/react-navigation",
+  "version": "2.18.8",
   "description": "Routing and navigation for your React Native apps",
   "main": "src/react-navigation.js",
   "repository": {
@@ -31,8 +31,6 @@
     "react-native": "0.63.4"
   },
   "dependencies": {
-    "clamp": "^1.0.1",
-    "create-react-context": "0.3.0",
     "hoist-non-react-statics": "3.3.2",
     "path-to-regexp": "^1.7.0",
     "query-string": "^6.1.0",

@@ -1,6 +1,6 @@
-import createReactContext from 'create-react-context';
+import React from 'react';
 
-const NavigationContext = createReactContext();
+const NavigationContext = React.createContext();
 
 export const NavigationProvider = NavigationContext.Provider;
 export const NavigationConsumer = NavigationContext.Consumer;

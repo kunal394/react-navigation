@@ -48,5 +48,10 @@
     "ecmaFeatures": {
       "modules": true
     }
+  },
+  "settings": {
+    "react": {
+      "version": "16.13.1"
+    }
   }
 }
